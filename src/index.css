@@ -1,0 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+.bg-main {
+  background-color: #152238 !important;
+  color: white !important;
+}
