@@ -14,7 +14,7 @@ export default function LoginCustomer() {
 
   async function registerForm(values) {
     setIsLoading(true);
-    const response = await axios.post(`https://localhost:7188/api/Customer/register?role=Customer`, values)
+    const response = await axios.post(`http://localhost:7188/api/Customer/register?role=Customer`, values)
       .catch((err) => {
         setIsLoading(false);
         seterror(err.response.data.message);

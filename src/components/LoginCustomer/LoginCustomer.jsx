@@ -14,15 +14,19 @@ export default function LoginCustomer() {
 
   async function loginForm(values) {
     setIsLoading(true);
-    const response  = await axios.post('https://localhost:7188/api/auth/login', values,{withCredentials: true}).catch((err) => {
+    //, headers:'X-Authorization , Set-Cookie'}
+    const response  = await axios.post('https://localhost:7188/api/auth/login', values,{withCredentials:true}).catch((err) => {
       setIsLoading(false);
       
-      // seterror(err.response.data.message);
+      seterror(err.response.data.message);
     });
+    const cookies = response.headers['x-authorization'];
     const data = response.data;
-    if (data.status === 'Success') {
+    console.log(response.headers);
+    console.log(cookies);
+    if (!data.isError) {
       // console.log(data);
-      console.log(response.headers);
+      //console.log(response);
       // console.log(data.headers);
       // console.log(data.status);
       setIsLoading(false);
