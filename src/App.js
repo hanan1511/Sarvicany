@@ -7,6 +7,7 @@ import RegisterCustomer from './components/RegisterCustomer/RegisterCustomer';
 import Notfound from './components/Notfound/Notfound';
 import LoginCustomer from './components/LoginCustomer/LoginCustomer';
 import Guest from './components/Guest/Guest';
+import DashBoard from './components/DashBoardAdmin/DashBoard';
 
 
 
@@ -18,6 +19,7 @@ let Routers = createBrowserRouter([
     {path:'home',element :<Home/>},
     {path:'registerCustomer',element :<RegisterCustomer/>},
     {path:'loginCustomer',element :<LoginCustomer/>},
+    {path:'DashBoard',element :<DashBoard/>},
     {index:'*',element :<Notfound/>},
     ]}
 ])
