@@ -7,7 +7,10 @@ import RegisterCustomer from './components/RegisterCustomer/RegisterCustomer';
 import Notfound from './components/Notfound/Notfound';
 import LoginCustomer from './components/LoginCustomer/LoginCustomer';
 import Guest from './components/Guest/Guest';
-import DashBoard from './components/DashBoardAdmin/DashBoard';
+import DashBoard from './components/Admin/DashBoardAdmin/DashBoard';
+import ShowCust from './components/Admin/ShowCustomer/ShowCust';
+import ShowServ from './components/Admin/ShowService/ShowServ';
+
 
 
 
@@ -20,6 +23,9 @@ let Routers = createBrowserRouter([
     {path:'registerCustomer',element :<RegisterCustomer/>},
     {path:'loginCustomer',element :<LoginCustomer/>},
     {path:'DashBoard',element :<DashBoard/>},
+    {path:'showcust',element :<ShowCust/>},
+    {path:'showserv',element :<ShowServ/>},
+    // {path:'showserv',element :<YourComponent/>},
     {index:'*',element :<Notfound/>},
     ]}
 ])
