@@ -20,7 +20,7 @@ export default function LoginCustomer() {
       
       seterror(err.response.data.message);
     });
-    const cookies = response.headers['x-authorization'];
+    const cookies = response.headers['x-Authorization'];
     const data = response.data;
     console.log(response.headers);
     console.log(cookies);

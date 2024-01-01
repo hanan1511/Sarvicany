@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
@@ -10,9 +10,9 @@ import Guest from './components/Guest/Guest';
 import DashBoard from './components/Admin/DashBoardAdmin/DashBoard';
 import ShowCust from './components/Admin/ShowCustomer/ShowCust';
 import ShowServ from './components/Admin/ShowService/ShowServ';
-
-
-
+import ShowCustReq from './components/Admin/ShowAllReq/ShowCustReq';
+import ShowAllWorker from './components/Admin/ShowAllWorker/ShowAllWorker';
+import WorkerReqDet from './components/Admin/WorkerReqDet/WorkerReqDet'
 
 
 
@@ -25,6 +25,9 @@ let Routers = createBrowserRouter([
     {path:'DashBoard',element :<DashBoard/>},
     {path:'showcust',element :<ShowCust/>},
     {path:'showserv',element :<ShowServ/>},
+    {path:'showcustreq',element :<ShowCustReq/>},
+    {path:'showWork',element :<ShowAllWorker/>},
+    {path:'Workreq',element :<WorkerReqDet/>},
     // {path:'showserv',element :<YourComponent/>},
     {index:'*',element :<Notfound/>},
     ]}

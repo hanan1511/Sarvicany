@@ -18,11 +18,11 @@
 .bgMain{
   background-color: var(--primary-color) !important;
 }
-.page {
+/* .page {
   background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../../../public/homeBackGround.jpg');
   background-position: center;
   background-size: cover;
-}
+} */
 .page p{
   font-weight: lighter;
   color: #ddd;
@@ -69,7 +69,7 @@ font-size: 54px;
 position: relative;
 z-index: 2;
 }
-.hero_img .overlay{
+/* .hero_img .overlay{
   background-image: url('../../../public/dots.png');
   background-repeat: repeat;
   top: 150px;
@@ -77,6 +77,9 @@ z-index: 2;
   width: 70%;
   height: 80%;
   z-index: 1;
+} */
+.colourr{
+    background-color:grey;
 }
 .parentTwo p{
   word-spacing: 2px;
@@ -172,4 +175,21 @@ border-radius: 50%;
 }
 .borderCustomer{
   border: #E9ECEF 1px solid;
+}
+
+.accept{
+    border-radius: 10px;
+    margin-left: -40px;
+    margin-right: 2%;
+    background-color: #2ABC27;
+    color: aliceblue;
+    font-weight: 800;
+    border-color: transparent;  
+}
+.reject{
+    border-radius: 10px;
+    background-color: #DC3434 ;
+    color: aliceblue;
+    font-weight: 800;
+    border-color: transparent;  
 }

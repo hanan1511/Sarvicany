@@ -1,6 +1,7 @@
 import Style from "./DashBoard.module.css";
 import { Table, Button } from 'react-bootstrap';
 import PaginatedTable from '../PaginatedTable';
+import { Link } from "react-router-dom";
 function DashBoard(){
     const columns = [
         { Header: 'Customer', accessor: 'customer' },
@@ -12,7 +13,7 @@ function DashBoard(){
       ];
     
       const data = [
-        { customer: 'hanan Hossam', worker: 'Doe', date: '14/11/2023', services: 'math lesson', status: 'Confirmed', actions: <Button ClassName={`${Style.reject}`} variant="info">Details</Button> },
+        { customer: 'hanan Hossam', worker: 'Doe', date: '14/11/2023', services: 'math lesson', status: 'Confirmed', actions: <Link to={`/Workreq`}><Button ClassName={`${Style.reject}`} variant="info">Details</Button> </Link>},
         // { customer: 'hanan', worker: 'John Doe', date: '14/11/2023', services: 'math lesson', status: 'Confirmed', actions: <Button variant="info">Details</Button> },
         // { customer: 'jjjj', worker: 'John', date: '15/11/2023', services: 'math lesson', status: 'Confirmed', actions: <Button variant="info">Details</Button> },
         // { customer: 'hanan Hossam', worker: 'Doe', date: '15/11/2023', services: 'math lesson', status: 'Confirmed', actions: <Button variant="info">Details</Button> },
