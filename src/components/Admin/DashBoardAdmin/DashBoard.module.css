@@ -61,9 +61,16 @@
     font-weight: 800;
     border-color: transparent;  
 }
-.reject{
+.details{
     border-radius: 10px;
     background-color: #1F2B6C ;
+    color: aliceblue;
+    font-weight: 800;
+    border-color: transparent;  
+}
+.reject{
+    border-radius: 10px;
+    background-color: #DC3434 ;
     color: aliceblue;
     font-weight: 800;
     border-color: transparent;  

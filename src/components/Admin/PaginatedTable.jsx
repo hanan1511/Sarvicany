@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { useTable, usePagination } from 'react-table';
-
+import Style from "../Admin/ShowCustomer/ShowCust.module.css";
 const PaginatedTable = ({ columns, data }) => {
   const {
     getTableProps,
@@ -42,9 +42,11 @@ const PaginatedTable = ({ columns, data }) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                ))}
+                    {row.cells.map(cell => (
+                      <td {...cell.getCellProps()}>
+                      {cell.column.id === 'isVerified' ? (cell.value ? 'True' : 'False') : cell.render('Cell')}
+                      </td>
+                  ))}
               </tr>
             );
           })}
