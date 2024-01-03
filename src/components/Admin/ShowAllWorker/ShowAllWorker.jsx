@@ -13,7 +13,10 @@ function ShowAllWorker(){
         {
             Header: 'Actions',
             accessor: 'actions',
-            Cell: ({ row }) => <Button className={`${Style.reject}`} >Block</Button>,
+            Cell: ({ row }) => <>
+            <Button className={`${Style.reject}`}>Reject</Button>
+            <Button className={`${Style.details}`}>Details</Button>
+          </>,
           },,
       ];
     const [error, seterror] = useState(null);

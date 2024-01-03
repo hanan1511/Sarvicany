@@ -173,3 +173,31 @@ border-radius: 50%;
 .borderCustomer{
   border: #E9ECEF 1px solid;
 }
+
+.tabular{
+  background-color: #DADDDE;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  border-radius: 10px;
+}
+
+.tabular >h2{
+  margin: 2%;
+  font-weight: bold;
+  justify-self: start;
+}
+
+.tables{
+  /* margin-top: 1%; */
+  background-color:rgba(190, 188, 193, 0.59);
+}
+
+.tables th{
+  background-color: rgba(180, 180, 181, 1);
+}
+
+.tables td{
+  background-color: #DADDDE !important;
+}

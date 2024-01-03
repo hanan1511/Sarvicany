@@ -13,6 +13,8 @@ import ShowServ from './components/Admin/ShowService/ShowServ';
 import ShowCustReq from './components/Admin/ShowAllReq/ShowCustReq';
 import ShowAllWorker from './components/Admin/ShowAllWorker/ShowAllWorker';
 import WorkerReqDet from './components/Admin/WorkerReqDet/WorkerReqDet'
+import WorkerRegister from './components/WorkerRegister/WorkerRegister';
+import ServiceRegister from './components/WorkerRegister/ServiceRegister';
 
 
 
@@ -28,6 +30,8 @@ let Routers = createBrowserRouter([
     {path:'showcustreq',element :<ShowCustReq/>},
     {path:'showWork',element :<ShowAllWorker/>},
     {path:'Workreq',element :<WorkerReqDet/>},
+    {path:'Workreg',element :<WorkerRegister/>},
+    {path:'servreg',element :<ServiceRegister/>},
     // {path:'showserv',element :<YourComponent/>},
     {index:'*',element :<Notfound/>},
     ]}

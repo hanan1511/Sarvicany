@@ -1,6 +1,41 @@
 import Style from "./ShowCustReq.module.css";
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Table, Button } from 'react-bootstrap';
+import PaginatedTable from '../PaginatedTable';
 function ShowCustReq(){
+    const columns = [
+        { Header: 'First Name', accessor: 'firstName' },
+        { Header: 'Last Name', accessor: 'lastName' },
+        { Header: 'Email', accessor: 'email' },
+        { Header: 'ID', accessor: 'id' },
+        { Header: 'Service', accessor: 'service' },
+        { Header: 'State', accessor: 'state' },
+        { Header: 'Worker', accessor: 'worker' },
+        {
+            Header: 'Actions',
+            accessor: 'actions',
+            Cell: ({ row }) => <Button className={`${Style.details}`} >Details</Button>,
+          },,
+      ];
+    const [error, seterror] = useState(null);
+    const [data, setData ]=useState(null);
+    async function fetchData() {
+        try {
+          const response = await axios.get('https://localhost:7188/');
+          // Handle the response data
+          setData(response.data);
+        } catch (error) {
+          // Handle errors
+          console.error('Error fetching data:', error);
+        }
+      }
+      
+      // Call fetchData when the component mounts
+      useEffect(() => {
+        fetchData();
+      }, []);
+
     return(
         <>
         <section className={`${Style.mainPadding}`}>
@@ -22,76 +57,12 @@ function ShowCustReq(){
                 </div>
             </div>
         </div>
-    </section>
-    <section>
-        <div className="container-fluid mt-5">
-            <div className="col-md-12 p-3">
-                <div className={`${Style.bg_secondaary} rounded-2 p-3`}>
-                    <h2 className="mb-4 fw-bolder">Requests</h2>
-                    <div className="table-responsive">
-                        <table className="table table-borderless">
-                            <thead>
-                                <tr>
-                                    <th className={`${Style.bg_secondaary} fw-bolder`}>Customer</th>
-                                    <th className={`${Style.bg_secondaary} fw-bolder`}>Worker</th>
-                                    <th className={`${Style.bg_secondaary} fw-bolder`}>Date</th>
-                                    <th className={`${Style.bg_secondaary} fw-bolder`}>Services</th>
-                                    <th className={`${Style.bg_secondaary} fw-bolder`}>Status</th>
-                                    <th className={`${Style.bg_secondaary} fw-bolder`}>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>hanan Hossam</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>John Doe</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>14/11/2023</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>math lesson</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>Confirmed</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}><button
-                                            className="btn btn-info text-white fw-bolder">
-                                            Details
-                                        </button></td>
-                                </tr>
-                                <tr>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}> Hossam</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>John Doe</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>14/11/2023</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>math lesson</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>Confirmed</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}><button
-                                            className="btn btn-info text-white fw-bolder">
-                                            Details
-                                        </button></td>
-                                </tr>
-                                <tr>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>hassan </td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>John Doe</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>14/11/2023</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>math lesson</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>Confirmed</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>
-                                        <button
-                                            className="btn btn-info text-white fw-bolder">
-                                            Details
-                                        </button></td>
-                                </tr>
-                                <tr>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>ashrf</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>John Doe</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>14/11/2023</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>math lesson</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}>Confirmed</td>
-                                    <td className={`${Style.bgCard} text-secondary fw-bolder`}><button
-                                            className="btn btn-info text-white fw-bolder">
-                                            Details
-                                        </button></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+    
+        <div className="row my-4">
+            <div className={`${Style.tabular}`}>
+                <h2>Customers' Requestes</h2><br/>
+                {/* <PaginatedTable columns={columns} data={data.payload.$values} /> */}
+            </div>       
         </div>
     </section>
     </>
