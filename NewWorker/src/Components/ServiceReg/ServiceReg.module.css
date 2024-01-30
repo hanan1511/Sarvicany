@@ -1,3 +1,21 @@
+.corners{
+    display: flex;
+}
+.corner{
+    width: 20%;
+    height: 30%;
+    margin-left: 60%;
+
+}
+.corner2{
+    width: 20%;
+    height: 30%;
+    margin-bottom: -34px;
+}
+.corner3{
+    margin-top: -0px;
+    width: 20%;
+}
 .mainHeadingSpan{
     color:  #72E9FD !important;
 }
@@ -12,7 +30,7 @@
 }
 
 .signUpPage{
-    padding:100px 0px 70px;
+    margin-top: -50px;
 }
 .mainParagraph{
     font-size: 18px;
@@ -28,7 +46,7 @@
     margin-top: 80px;
     position: sticky;
     top: 0;
-    margin-left: 100px;
+    margin-left: 70px;
 }
 
 /* .imgo::before{

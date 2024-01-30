@@ -76,11 +76,15 @@ function ServicReg(){
   };
     return(
         <>
+        <div className={`${Style.corners}`} >
+          <img src="upperCorner2.png" className={`${Style.corner3}`} />
+          <img src="upperCorner.png" className={`${Style.corner}`} />
+        </div>
         <section className={` ${Style.signUpPage}`}>
         <div className="container py-5">
             <div className="row">
                 <div className="col-md-6">
-                    <img src="logo.png" className={`${Style.imgo} img-fluid  h-50 `}/>
+                    <img src="logo.png" className={`${Style.imgo} img-fluid  h-60 `}/>
                 </div>
                 <div className="col-md-6">
                 <div className={` ${Style.signUpForm} p-4 rounded-3`}>
@@ -177,6 +181,9 @@ function ServicReg(){
           </div>
         </div>
       </section>
+      <div>
+        <img src="downCorner.png" className={`${Style.corner2}`} />
+      </div>
         </>
     );
 }
