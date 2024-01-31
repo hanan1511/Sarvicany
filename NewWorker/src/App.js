@@ -6,13 +6,15 @@ import WorkerReg from "./Components/WorkerReg/WorkerReg";
 import ServicReg from "./Components/ServiceReg/ServiceReg";
 import Landpage from "./Components/Landpage/Landpage";
 import Table from './Components/Tables/Table';
+import ReqDetails from "./Components/ReqDetails/ReqDetails";
 
 let Routers = createBrowserRouter([
   {path:'/',element:<Layout/>, children:[
     {index:true,element:<WorkerReg/>},
     {path:'/serviceReg',element:<ServicReg/>},
     {path:'/landpage',element:<Landpage/>},
-    {path:'/table',element:<Table/>}
+    {path:'/table',element:<Table/>},
+    {path:'/reqdetail',element:<ReqDetails/>}
   ]}
 ])
 function App() {

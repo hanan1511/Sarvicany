@@ -1,32 +1,27 @@
+import { boolean } from "yup";
 import Table from "../Tables/Table";
-import Style from "./Landpage.module.css"
+import Style from "./Landpage.module.css";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 function Landpage(){
-    const data = [
-        { OrderID: 10248, CustomerID: 'VINET', ShipName: 'Vins et alcools Chevalier', OrderDate: '1996-07-04' },
-        { OrderID: 10249, CustomerID: 'VINET', ShipName: 'Vins et alcools Chevalier', OrderDate: '1996-07-04' },
-        { OrderID: 10250, CustomerID: 'VINET', ShipName: 'Vins et alcools Chevalier', OrderDate: '1996-07-04' },
-        { OrderID: 10251, CustomerID: 'VINET', ShipName: 'Vins et alcools Chevalier', OrderDate: '1996-07-04' },
-        { OrderID: 10252, CustomerID: 'VINET', ShipName: 'Vins et alcools Chevalier', OrderDate: '1996-07-04' },
-        { OrderID: 10253, CustomerID: 'VINET', ShipName: 'Vins et alcools Chevalier', OrderDate: '1996-07-04' },
-        { OrderID: 10254, CustomerID: 'VINET', ShipName: 'Vins et alcools Chevalier', OrderDate: '1996-07-04' },
-        // ... more data
-    ];
+    let navigate = useNavigate();
+    const [selectedRow, setSelectedRow] = useState(null);
+    const handleRowClick = (rowData) => {
+        console.log('Clicked Row Data:', rowData);
+        //setSelectedRow(rowData);
+        navigate(`/reqdetail`,{ state: { rowData } });
+    };
+
     const columns=[
         {
-            field:'OrderID',
-            headerText:'Order ID',
+            field:'CustomerName',
+            headerText:'Customer Name',
             width:'200',
             textAlign:'center'
         },
         {
-            field:'CustomerID',
-            headerText:'Customer ID',
-            width:'200',
-            textAlign:'center'
-        },
-        {
-            field:'ShipName',
-            headerText:'Ship Name',
+            field:'CustomerAddress',
+            headerText:'Customer Address',
             width:'200',
             textAlign:'center'
         },
@@ -37,8 +32,42 @@ function Landpage(){
             format:'yMd',
             textAlign:'center'
         },
-
+        {
+            field:'OrderTime',
+            headerText:'Order Time',
+            width:'200',
+            textAlign:'center'
+        },
+        {
+            field:'OrderStatus',
+            headerText:'Order Approved',
+            width:'200',
+            formate:boolean,
+            textAlign:'center'
+        },
+        {
+            field: 'ButtonColumn',
+            headerText: 'Action',
+            width: '100',
+            template: () => (
+                <button className={`${Style.button}`} onClick={() => handleRowClick}>
+                  Details
+                </button>
+              ),
+            textAlign: 'Center',
+          },
     ];
+    const data = [
+        { CustomerName: 10248, CustomerAddress: 'VINET', OrderTime: 'Vins et alcools Chevalier', OrderDate: '1996-07-04',   OrderStatus:false },
+        { CustomerName: 10249, CustomerAddress: 'VINET', OrderTime: 'Vins et alcools Chevalier', OrderDate: '1996-07-04',   OrderStatus:false },
+        { CustomerName: 10250, CustomerAddress: 'VINET', OrderTime: 'Vins et alcools Chevalier', OrderDate: '1996-07-04',   OrderStatus:false },
+        { CustomerName: 10251, CustomerAddress: 'VINET', OrderTime: 'Vins et alcools Chevalier', OrderDate: '1996-07-04',   OrderStatus:false },
+        { CustomerName: 10252, CustomerAddress: 'VINET', OrderTime: 'Vins et alcools Chevalier', OrderDate: '1996-07-04',   OrderStatus:false },
+        { CustomerName: 10253, CustomerAddress: 'VINET', OrderTime: 'Vins et alcools Chevalier', OrderDate: '1996-07-04',   OrderStatus:true },
+        { CustomerName: 10254, CustomerAddress: 'VINET', OrderTime: 'Vins et alcools Chevalier', OrderDate: '1996-07-04',   OrderStatus:false },
+        // ... more data
+    ];
+    
     return(
         <>
         <div className={`${Style.land}`}>
@@ -58,10 +87,9 @@ function Landpage(){
                 </div>
             </div>
             <div className="row d-flex justify-content-center align-item-center ">
-                <Table data={data} columns={columns} className={`col-md-12 ${Style.table}`}/>
+                <Table data={data} columns={columns} handleRowClick={handleRowClick} className={`col-md-12 ${Style.table}`}/>
             </div>
         </div>
-        
         </>
     );
 }

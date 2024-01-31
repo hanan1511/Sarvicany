@@ -1,11 +1,10 @@
-import { GridComponent, ColumnDirective, ColumnsDirective, Resize, Sort, ContextMenu, Filter, Page, ExcelExport, PdfExport, Edit, Inject } from '@syncfusion/ej2-react-grids';
+import { GridComponent, ColumnDirective, ColumnsDirective, Resize, Sort, ContextMenu, Filter, Page, ExcelExport, PdfExport, Edit, Inject,Selection } from '@syncfusion/ej2-react-grids';
 import Style from "./Table.module.css";
-import { useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-function Table({ data, columns }){
+function Table({ data, columns,handleRowClick}){
     const editing = { allowDeleting: true, allowEditing: true };
-    console.log('Received Columns:', columns);
-      return (
+    return (
         <>
         <div className={`w-80 m-2 md:m-10 mt-5 p-2 md:p-10 bg-light rounded-3 d-flex justify-content-center align-item-center align-self-center`}>
             <GridComponent dataSource={data}
@@ -13,7 +12,8 @@ function Table({ data, columns }){
              allowSorting
              allowExcelExport
              allowPdfExport
-             editSettings={editing}>
+             editSettings={editing}
+             rowSelected={(args) => handleRowClick(args.data)}>
             {/* Define columns for the grid */}
             <ColumnsDirective >
                 {columns.map((item,index)=>(
@@ -22,7 +22,7 @@ function Table({ data, columns }){
             </ColumnsDirective>
     
             {/* Enable additional features like sorting, resizing, etc. */}
-            <Inject services={[Resize, Sort, ContextMenu, Filter, Page, ExcelExport, PdfExport, Edit]} />
+            <Inject services={[Resize, Sort, ContextMenu, Filter, Page, ExcelExport, PdfExport,Selection]} />
             </GridComponent>
         </div>
         </>
