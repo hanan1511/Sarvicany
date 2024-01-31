@@ -10,7 +10,7 @@ export default function Home() {
                     are worker that can Sign Up or Sign In Review Requests, Review Chats,
                     Remove Service, add service and update availability and update its info
                     and the admin can check worker Requests, Organize service Schedules,
-                    Check user Feedback, Organize Rating, Check Traffic Locations
+                    Check user Feedback, Organize Rating, Check Traffic Locations hello
                     and the customer can choose the service he wants and chat with the worker
                     and track the worker stages and can rate the worker after he finishes.</p>
                 <div className={`${Style.homePageButton} mt-5`}>
