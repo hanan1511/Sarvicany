@@ -3,7 +3,7 @@ import NavWork from '../NavBarWork/NavWork';
 import React from 'react';
 function Layout(){
     const location = useLocation();
-    const isnotReg=!(location.pathname==='/'||location.pathname==='/serviceReg');
+    const isnotReg=!(location.pathname==='/workerReg'||location.pathname==='/serviceReg');
     return(
         <>
         {isnotReg && <NavWork/>}

@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header.jsx";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 export default function Criteria() {
-
-const validationSchema = Yup.object().shape({
+  const [error,seterror]=useState(null);
+  const[isLoading,setIsLoading]=useState(false);
+  const validationSchema = Yup.object().shape({
     firstName: Yup.string().required('First Name is required'),
     lastName: Yup.string().required('Last Name is required'),
     email: Yup.string().email('Invalid email address').required('Email is required'),
@@ -12,7 +15,18 @@ const validationSchema = Yup.object().shape({
     description: Yup.string().required('Description is required'),
   });
   
-
+  async function addCritria (values){
+    setIsLoading(true);
+    const response  = await axios.post('https://localhost:7188/api/Criteria', values).catch((err) => {
+      seterror(err.response.data.message);
+      setIsLoading(false);
+    });
+    if(response.data.criteriaID){
+      window.alert("critria is add successfuly");
+    }else{
+      window.alert("failed to add critria");
+    }
+  }
   const initialValues = {
     firstName: '',
     lastName: '',
@@ -26,8 +40,8 @@ const validationSchema = Yup.object().shape({
     const formData = {
         criteriaName: values.criteriaName,
         description: values.description,
-      };
-    console.log(formData);
+    };
+    addCritria(formData);
     setSubmitting(false);
   };
   return (
@@ -69,7 +83,7 @@ const validationSchema = Yup.object().shape({
           <ErrorMessage name="description" component="div" className="text-danger" />
         </div>
 
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" id="but" disabled={isLoading} className="btn btn-primary">Submit</button>
       </Form>
     </Formik>
     </div>

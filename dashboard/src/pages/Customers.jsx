@@ -1,63 +1,60 @@
-import React from 'react';
 import {
   useTable,
   useSortBy,
   useGlobalFilter,
   usePagination,
 } from "react-table";
+import axios from "axios";
 import Header from '../components/Header.jsx';
-
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { boolean } from "yup";
 const Customers = () => {
+
+  let navigate = useNavigate();
+  const [workers, setWorkers] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const unactiveWorkers=[];
+
   const data = React.useMemo(
-    () => [
-      { id: 1, name: "John Doe", age: 25 },
-      { id: 2, name: "Jane Smith", age: 30 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "Bob Johnson", age: 22 },
-      { id: 3, name: "zob Johnson", age: 22 },
-      { id: 3, name: "zob Johnson", age: 22 },
-      { id: 3, name: "zob Johnson", age: 22 },
-      { id: 3, name: "zob Johnson", age: 22 },
-      { id: 3, name: "zob Johnson", age: 22 },
-    ],
-    []
+    () => {
+      if (loading) {
+        return [];
+      }
+
+      return workers;
+    },
+    [loading, unactiveWorkers,workers] // Add the dependencies
   );
 
   const columns = React.useMemo(
     () => [
       { Header: "ID", accessor: "id" },
-      { Header: "Name", accessor: "name" },
-      { Header: "Age", accessor: "age", sortType: "basic" },
+      { Header: "First Name", accessor: "firstName" , sortType: "basic"},
+      { Header: "Last Name", accessor: "lastName", sortType: "basic" },
+      { Header: "Email", accessor: "email", sortType: "basic" },
+      {
+        Header: "Is Verified",
+        accessor: "isVerified",
+        sortType: "basic",
+        Cell: ({ value }) => (value ? "Yes" : "No"), // Display "Yes" for true, "No" for false
+      },
       {
         Header: "Actions",
         accessor: "actions",
         Cell: (row) => (
           <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-            <button
-              onClick={() => handleAccept(row.row.original)}
+              <button
+              onClick={() => handleAccept(row.row.original.id)}
               className="btn btn-success"
-            >
+             >
               Accept
             </button>
             <button
-              onClick={() => handleDelete(row.row.original.id)}
-              className="btn btn-danger"
+              onClick={() => handleDetails(row.row.original)}
+              className="btn" style={{backgroundColor:'#1daaf1'}}
             >
-              Delete
+              Details
             </button>
           </div>
         ),
@@ -66,15 +63,48 @@ const Customers = () => {
     []
   );
 
-  const handleAccept = (data) => {
-    // Implement your logic for accepting here
-    console.log("Accepted:", data);
+  const [error, seterror] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        'https://localhost:7188/api/Admin/GetServiceProvidersRegistrationRequests'
+      );
+      // Handle the response data
+      setWorkers(response.data.payload);
+      console.log(response.data);
+    } catch (error) {
+      // Handle errors
+      console.error('Error fetching data:', error);
+      seterror('Error fetching data');
+    }finally {
+      setLoading(false);
+    }
   };
 
-  const handleDelete = (id) => {
-    // Implement your logic for deleting here
-    console.log("Deleted:", id);
-  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
+  async function handleAccept(id){
+        // Navigate to another page and pass the row data as props
+        const response = await axios.post(`https://localhost:7188/api/Admin/ApproveServiceProvider?WorkerID=${id}`)
+        .catch((err) => {
+        seterror(err.response.data.message);
+      });
+      if(response){
+        window.alert("the worker accepted");
+      }else{
+        console.log(error);
+      }
+    }
+
+    const handleDetails = (row) => {
+      // Navigate to another page and pass the row data as props
+      navigate('/admin/reqdet', { state: { rowData: row } });
+    };
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -92,12 +122,12 @@ const Customers = () => {
     pageCount,
     setPageSize, // Function to set page size
     pageSize,
-  } = useTable({ columns, data }, useGlobalFilter, useSortBy, usePagination);
+  } = useTable({ columns,data }, useGlobalFilter, useSortBy, usePagination);
 
   const { globalFilter, pageIndex } = state;
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="Customers" />
+      <Header category="Page" title="Service Providers" />
       <div className="container-fluid mt-4">
       <div className="mb-3 d-flex justify-content-between">
         <input
@@ -149,7 +179,6 @@ const Customers = () => {
           })}
         </tbody>
       </table>
-
       <div className="mt-3 d-flex justify-content-between">
         <button
           onClick={() => gotoPage(0)}

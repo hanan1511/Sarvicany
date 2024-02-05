@@ -1,6 +1,6 @@
 .imgo{
     height: 400px;
-    margin-left: 100px;
+    /* margin-left: 100px; */
 }
 .table{
     width: 90%;
@@ -24,12 +24,17 @@
 }
 .land p{
     color: white;
-    font-size: 60px;
+    font-size: 50px;
     font-weight: bolder;
     text-align: center;
-    margin-right: 30px;
+    /* margin-right: 30px; */
     /* font-family: "Poppins", sans-serif; */
     /* width: 50%; */
+}
+.orderstatus{
+    width: 300px;
+    margin-left: 10px;
+    box-shadow: -10px 5px 10px #dcdada ;
 }
 .bigHead{
     margin-top: 50px;

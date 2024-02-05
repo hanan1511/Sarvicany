@@ -78,6 +78,28 @@
     font-size: 18px;
 }
 
+.cancel{
+    border-radius: 3px;
+    border-style: none;
+    background-color:red ;
+    color: white;
+    height: 35px;
+    font-weight: 600;
+    font-size: 18px;
+    align-self: center;
+    justify-content: center;
+}
+.canceldes{
+    border-radius: 3px;
+    border-style: none;
+    background-color:rgba(254, 68, 68, 0.344) ;
+    color: white;
+    height: 35px;
+    font-weight: 600;
+    font-size: 18px;
+    align-self: center;
+    justify-content: center;
+}
 .acc:hover{
     background-color: #152238;
 }

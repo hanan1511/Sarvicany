@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
-import { BsCurrencyDollar } from 'react-icons/bs';
+import React, { useContext,useState,useEffect } from 'react';
 import { GoPrimitiveDot } from 'react-icons/go';
+import { BsFillPersonLinesFill,BsFillGearFill,BsPersonFillGear,BsCartFill,BsCurrencyDollar } from "react-icons/bs";
 import { IoIosMore } from 'react-icons/io';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import Stacked from '../components/Charts/Stacked.jsx'
@@ -11,7 +11,7 @@ import Button from '../components/Button.jsx'
 import { earningData, medicalproBranding, recentTransactions, weeklyStats, dropdownData, SparklineAreaData, ecomPieChartData } from '../data/dummy';
 import { StateContext } from '../contexts/ContextProvider';
 import product9 from '../data/product9.jpg';
-
+import axios from 'axios';
 const DropDown = ({ currentMode }) => (
   <div className="w-28 border-1 border-color px-2 py-1 rounded-md">
     <DropDownListComponent id="time" fields={{ text: 'Time', value: 'Id' }} style={{ border: 'none', color: (currentMode === 'Dark') && 'white' }} value="1" dataSource={dropdownData} popupHeight="220px" popupWidth="120px" />
@@ -19,8 +19,47 @@ const DropDown = ({ currentMode }) => (
 );
 
 const Ecommerce = () => {
+  const[customer,setCustomers]=useState(0);
+  const[orders,setOrders]=useState(0);
+  const[workers,setWorkers]=useState(0);
+  const[services,setServices]=useState(0);
+  const[error,seterror]=useState(null); 
   const { currentColor, currentMode } = useContext(StateContext);
 
+  const fetchData = async () => {
+    try {
+      const response1 = await axios.get(
+        'https://localhost:7188/api/Admin/getCustomers'
+      );
+      setCustomers(response1.data.payload.length);
+      
+      const response2 = await axios.get(
+        'https://localhost:7188/api/Admin/getServiceProviders'
+      );
+      const verifiedWorkers = response2.data.payload.filter(worker => worker.isVerified);
+      setWorkers(verifiedWorkers.length);
+
+      const response3 = await axios.get(
+        'https://localhost:7188/api/Admin/getServices'
+      );
+      setServices(response3.data.payload.length);
+
+      const response4 = await axios.get(
+        'https://localhost:7188/api/Admin/getAllOrders'
+      );
+      setOrders(response4.data.payload.length);
+
+    } catch (error) {
+      // Handle errors
+      console.error('Error fetching data:', error);
+      seterror('Error fetching data');
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
   return (
     <div className="mt-24">
       <div className="flex flex-wrap lg:flex-nowrap justify-center ">
@@ -38,34 +77,73 @@ const Ecommerce = () => {
               <BsCurrencyDollar />
             </button>
           </div>
-          <div className="mt-6">
-            <Button
-              color="white"
-              bgColor={currentColor}
-              text="Download"
-              borderRadius="10px"
-            />
-          </div>
         </div>
         <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
-          {earningData.map((item) => (
-            <div key={item.title} className="bg-white h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
-              <button
-                type="button"
-                style={{ color: item.iconColor, backgroundColor: item.iconBg }}
-                className="text-2xl opacity-0.9 rounded-full  p-4 hover:drop-shadow-xl"
-              >
-                {item.icon}
-              </button>
-              <p className="mt-3">
-                <span className="text-lg font-semibold">{item.amount}</span>
-                <span className={`text-sm text-${item.pcColor} ml-2`}>
-                  {item.percentage}
-                </span>
-              </p>
-              <p className="text-sm text-gray-400  mt-1">{item.title}</p>
-            </div>
-          ))}
+          <div className="bg-white h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
+            <button
+              type="button"
+              style={{ color: '#white', backgroundColor: 'rgb(230, 163, 19)' }}
+              className="text-2xl opacity-0.9 rounded-full text-white p-4 hover:drop-shadow-xl"
+            >
+            <BsFillPersonLinesFill />
+            </button>
+            <p className="mt-3">
+              <span className="text-lg font-semibold">{customer}</span>
+              <span className={`text-sm ml-2`}>
+              </span>
+            </p>
+            <p className="text-sm text-gray-400  mt-1">Customers</p>
+          </div>
+          
+
+          <div className="bg-white h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
+            <button
+              type="button"
+              style={{ color: '#white', backgroundColor: 'rgb(88, 217, 8)' }}
+              className="text-2xl opacity-0.9 rounded-full text-white p-4 hover:drop-shadow-xl"
+            >
+            <BsPersonFillGear />
+            </button>
+            <p className="mt-3">
+              <span className="text-lg font-semibold">{workers}</span>
+              <span className={`text-sm ml-2`}>
+              </span>
+            </p>
+            <p className="text-sm text-gray-400  mt-1">Service Providers</p>
+          </div>
+
+          <div className="bg-white h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
+            <button
+              type="button"
+              style={{ color: '#white', backgroundColor: 'rgb(8, 196, 217)' }}
+              className="text-2xl opacity-0.9 rounded-full text-white p-4 hover:drop-shadow-xl"
+            >
+            <BsFillGearFill />
+            </button>
+            <p className="mt-3">
+              <span className="text-lg font-semibold">{services}</span>
+              <span className={`text-sm ml-2`}>
+              </span>
+            </p>
+            <p className="text-sm text-gray-400  mt-1">Services</p>
+          </div>
+
+          <div className="bg-white h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
+            <button
+              type="button"
+              style={{ color: '#white', backgroundColor: 'rgb(246, 149, 214)' }}
+              className="text-2xl opacity-0.9 rounded-full text-white p-4 hover:drop-shadow-xl"
+            >
+            <BsCartFill />
+            </button>
+            <p className="mt-3">
+              <span className="text-lg font-semibold">{orders}</span>
+              <span className={`text-sm ml-2`}>
+              </span>
+            </p>
+            <p className="text-sm text-gray-400  mt-1">Orders</p>
+          </div>
+
         </div>
       </div>
 

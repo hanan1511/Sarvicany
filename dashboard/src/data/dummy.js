@@ -23,6 +23,8 @@ import {
   BsCurrencyDollar,
   BsShield,
   BsChatLeft,
+  BsPersonFillGear,
+  BsFillGearFill
 } from "react-icons/bs";
 import { BiColorFill } from "react-icons/bi";
 import { IoMdContacts } from "react-icons/io";
@@ -540,16 +542,29 @@ export const links = [
         name: "orders",
         icon: <AiOutlineShoppingCart />,
       },
-      {
-        name: "employees",
-        icon: <IoMdContacts />,
-      },
+      // {
+      //   name: "reqdet",
+      //   icon: <AiOutlineShoppingCart />,
+      // },
       {
         name: "customers",
         icon: <RiContactsLine />,
-      },      {
+      },
+      {
+        name: "Service Providers",
+        icon: <BsPersonFillGear />,
+      },
+      {
+        name: "Providers Requests",
+        icon: <IoMdContacts />,
+      },
+      {
         name: "criteria",
         icon: <FiCheckSquare  />,
+      },
+      {
+        name: "service",
+        icon: <BsFillGearFill  />,
       },
     ],
   },

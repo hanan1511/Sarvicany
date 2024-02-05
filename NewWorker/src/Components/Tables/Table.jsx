@@ -6,7 +6,7 @@ function Table({ data, columns,handleRowClick}){
     const editing = { allowDeleting: true, allowEditing: true };
     return (
         <>
-        <div className={`w-80 m-2 md:m-10 mt-5 p-2 md:p-10 bg-light rounded-3 d-flex justify-content-center align-item-center align-self-center`}>
+        <div className={` bg-light rounded`}>
             <GridComponent dataSource={data}
              allowPaging
              allowSorting

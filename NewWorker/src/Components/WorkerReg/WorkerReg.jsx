@@ -55,7 +55,7 @@ function WorkerReg(){
       .min(14, "Wrong Way to write National ID"),
     criminalRecord: Yup.string()
       .required("Criminal Record is required")
-      .max(255, "Address is too long"),
+      .max(255, "criminal is too long"),
   });
 
   const formik = useFormik({
@@ -64,6 +64,7 @@ function WorkerReg(){
       lastName: "",
       username: "",
       phoneNumber: "",
+      userType: "worker",
       email: "",
       address: "",
       password: "",

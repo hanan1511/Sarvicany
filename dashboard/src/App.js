@@ -22,14 +22,18 @@ import Editor from './pages/Editor.jsx';
 import ColorPicker from './pages/ColorPicker.jsx';
 import Notfound from './pages/Notfound.jsx';
 import Criteria from './pages/Criteria.jsx';
+import RequestDet from './pages/RequestDet.jsx';
+import Providers from './pages/Providers.jsx';
+import Service from './pages/Service.jsx';
+import OrderDet from './pages/OrderDet.jsx';
 
 let routers = createBrowserRouter([
   { path:'/admin',element:<Admin/>, children:[
     {index:true,element:<Ecommerce/>},
     {path:'ecommerce' , element:<Ecommerce/>},
     {path:'orders' , element:<Orders/>},
-    {path:'employees' , element:<Employees/>},
-    {path:'customers' , element:<Customers/>},
+    {path:'customers' , element:<Employees/>},
+    {path:'Providers Requests' , element:<Customers/>},
     {path:'kanban' , element:<Kanban/>},
     {path:'editor' , element:<Editor/>},
     {path:'calendar' , element:<Calendar/>},
@@ -43,6 +47,10 @@ let routers = createBrowserRouter([
     {path:'pyramid' , element:<Pyramid/>},
     {path:'stacked' , element:<Stacked/>},
     {path:'criteria' , element:<Criteria/>},
+    {path:'reqdet' , element:<RequestDet/>},
+    {path:'service Providers' , element:<Providers/>},
+    {path:'service' , element:<Service/>},
+    {path:'orderdet' , element:<OrderDet/>},
     {path:'*' , element:<Notfound/>}
   ]}
 ])

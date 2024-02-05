@@ -3,8 +3,19 @@ import { FaBolt, FaBullseye, FaHourglass } from "react-icons/fa";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Style from "./Availability.module.css";
+import axios from "axios";
 const Availability = () => {
+  const workerid="529dba94-89a1-46a4-bdc1-da5f39e6d7c2";
   const hoursArray = Array.from({ length: 16 }, (_, index) => index + 7);
+
+  async function aval(values) {
+    const response = await axios.post(`https://localhost:7188/api/ServiceProvider/SetAvailability?workerID=${workerid}`, values);
+
+    console.log(response.data.payload)
+    if (!response.isError) {
+      alert("avalabilty add succssfuly");
+    }
+  }
 
   const handleDropdownChange = (event) => {
     const chosenDay = event.target.value;
@@ -90,7 +101,8 @@ const Availability = () => {
         slots: slots,
       };
 
-      console.log(submittedObject);
+      console.log("sub", submittedObject);
+      aval(submittedObject);
     },
   });
 

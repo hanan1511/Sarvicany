@@ -8,18 +8,20 @@ import Landpage from "./Components/Landpage/Landpage";
 import Table from "./Components/Tables/Table";
 import ReqDetails from "./Components/ReqDetails/ReqDetails";
 import Availability from "./Components/AddAvailability/Availability";
+import Profile from "./Components/Profile/Profile";
 
 let Routers = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <WorkerReg /> },
+      { index: true, element: <Landpage /> },
       { path: "/serviceReg", element: <ServicReg /> },
-      { path: "/landpage", element: <Landpage /> },
+      { path: "/workerReg", element: <WorkerReg /> },
       { path: "/table", element: <Table /> },
       { path: "/addAvailability", element: <Availability /> },
       { path: "/reqdetail", element: <ReqDetails /> },
+      { path: "/profile", element: <Profile/> },
     ],
   },
 ]);
