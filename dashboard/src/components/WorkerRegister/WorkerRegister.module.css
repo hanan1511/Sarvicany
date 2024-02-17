@@ -1,0 +1,67 @@
+.imgo {
+  margin-left: 75px;
+  margin-top: 150px;
+}
+.signUpPage {
+  padding: 160px 0px !important;
+}
+.btnMain {
+  background-color: #152238;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.btnMain:hover {
+  background-color: #152238;
+  color: white;
+}
+.signUpPage {
+  padding: 100px 0px 70px;
+}
+.mainHeadingSpan {
+  color: #72e9fd !important;
+}
+.mainLogin {
+  color: #152238;
+  text-decoration: none;
+  font-size: 30px;
+}
+.mainParagraph {
+  font-size: 18px;
+  font-family: "Poppins", sans-serif;
+  color: black;
+}
+.mainHeading {
+  margin-bottom: 80px;
+  font-size: 50px;
+}
+input,
+select {
+  background-color: #f4f4f4;
+  padding: 15px;
+  border: none;
+}
+input:focus {
+  border-color: #152238 !important;
+}
+
+select:focus {
+  border-color: #152238 !important;
+}
+
+.signUpForm {
+  background-color: grey;
+  position: relative;
+}
+.signUpForm::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  right: -10%;
+  width: 2px;
+  height: 95%;
+  z-index: 2;
+  background-color: #eeeeee;
+  transition: width 0.3s, color 0.3s;
+}
