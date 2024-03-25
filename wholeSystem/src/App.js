@@ -53,7 +53,8 @@ import DashBoard from "./components/DashBoardAdmin/DashBoard.jsx";
 import { Waiting } from "./components/ServiceReg/waiting.jsx";
 import Box from "./components/orderStatus/orderStatus.jsx";
 import { OrdersCust } from "./components/orders/Orders.jsx";
-import { AppProvider } from './components/context/AppContext.jsx';
+import { AppProvider } from "./components/context/AppContext.jsx";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 let routers = createBrowserRouter([
   {
     path: "/admin",
@@ -95,7 +96,8 @@ let routers = createBrowserRouter([
       { path: "addAvailability", element: <Availability /> },
       { path: "reqdetail", element: <ReqDetails /> },
       { path: "profile", element: <Profile /> },
-      {path:"waiting",element:<Waiting/>},
+      { path: "waiting", element: <Waiting /> },
+      { path: "*", element: <Notfound /> },
     ],
   },
   {
@@ -112,9 +114,10 @@ let routers = createBrowserRouter([
       { path: "service", element: <ServiceDescription /> },
       { path: "workers", element: <Workers /> },
       { path: "pay", element: <ResponsePage /> },
-      { path: "status", element: <Box/> },
-      { path: "ordersCust", element: <OrdersCust/> },
+      { path: "status", element: <Box /> },
+      { path: "ordersCust", element: <OrdersCust /> },
       { index: "*", element: <Notfound /> },
+      
     ],
   },
 ]);
@@ -122,9 +125,16 @@ let routers = createBrowserRouter([
 const App = () => {
   return (
     <>
-    <AppProvider>
-      <RouterProvider router={routers} />
-    </AppProvider>
+      <PayPalScriptProvider
+        options={{
+          "client-id":
+            "Aewy0wiq_hv6DYE9VDdJirqFv6X_Dr6sK0c1RWpQljq4vpM8CaJ6GoSssx_XFJTxA1VcTZ2wxy7B0hnV",
+        }}
+      >
+        <AppProvider>
+          <RouterProvider router={routers} />
+        </AppProvider>
+      </PayPalScriptProvider>
     </>
   );
 };

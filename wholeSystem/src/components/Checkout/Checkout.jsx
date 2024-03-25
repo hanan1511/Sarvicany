@@ -1,38 +1,49 @@
-import React ,{useState,useEffect}from "react";
+import React, { useState, useEffect } from "react";
 import Style from "./Checkout.module.css";
 import Mission from "../Mission/Mission.jsx";
 import axios from "axios";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { PaypalCheckoutButton } from "../PaypalCheckoutButton.js";
 export default function Checkout() {
-  let {state} = useLocation();
-  const [data,setData]=useState(null);
+  let { state } = useLocation();
+  const [data, setData] = useState(null);
   console.log(state);
-  const [error,setError]=useState(null);
-  const [summtion,setSum]=useState(0);
+  const [error, setError] = useState(null);
+  const [summtion, setSum] = useState(0);
 
-  async function getCart(){
-    const response = await axios.get(`https://localhost:7188/api/Customer/getCart?customerId=${state}`);
-    if(!response.data.isError){
+  async function getCart() {
+    const response = await axios.get(
+      `https://localhost:7188/api/Customer/getCart?customerId=${state}`
+    );
+    if (!response.data.isError) {
       console.log(response.data.payload);
       setData(response.data.payload.requestedServices);
-      const totalSum = response.data.payload.requestedServices.reduce((acc, curr) => acc + curr.price, 0);
-        setSum(totalSum);
+      const totalSum = response.data.payload.requestedServices.reduce(
+        (acc, curr) => acc + curr.price,
+        0
+      );
+      setSum(totalSum);
     }
   }
 
-  async function handelPay(){
-    const respone= await axios.post(`https://localhost:7188/api/Customer/orderCart?customerId=${state}`).catch((err)=>{
-      setError(err.response.data.message);
-    });
-    if(respone){
+  async function handelPay() {
+    const respone = await axios
+      .post(`https://localhost:7188/api/Customer/orderCart?customerId=${state}`)
+      .catch((err) => {
+        setError(err.response.data.message);
+      });
+    if (respone) {
       console.log(respone);
-      window.location.href =respone.data.payload.paymentUrl;
+      window.location.href = respone.data.payload.paymentUrl;
     }
   }
-
-  useEffect(()=>{
+  const product = {
+    description: "Design+Code React Hooks Course",
+    price: 19,
+  };
+  useEffect(() => {
     getCart();
-  },[]);
+  }, []);
 
   return (
     <>
@@ -43,7 +54,11 @@ export default function Checkout() {
               <div>
                 <h1 className="text-center">Checkout</h1>
               </div>
-              {error == null ? '' : <div className="alert alert-danger">{error}</div>}
+              {error == null ? (
+                ""
+              ) : (
+                <div className="alert alert-danger">{error}</div>
+              )}
             </div>
             <div className="col-md-6">
               <div>
@@ -155,20 +170,18 @@ export default function Checkout() {
                   <h3 className="fw-bolder">Product</h3>
                   <h3 className="fw-bolder">Subtotal</h3>
                 </div>
-                {data&&
-                <>
-                {
-                  data.map((ele)=>(
-                    <div
-                      className={`d-flex justify-content-between align-items-center p-4  ${Style.bottomBorder}`}
-                    >
-                      <h3>{ele.serviceName}</h3>
-                      <h3>{ele.price} EGP</h3>
-                    </div>
-                  ))
-                }
-                </>
-                }
+                {data && (
+                  <>
+                    {data.map((ele) => (
+                      <div
+                        className={`d-flex justify-content-between align-items-center p-4  ${Style.bottomBorder}`}
+                      >
+                        <h3>{ele.serviceName}</h3>
+                        <h3>{ele.price} EGP</h3>
+                      </div>
+                    ))}
+                  </>
+                )}
                 {/* <div
                   className={d-flex justify-content-between align-items-center p-4  ${Style.bottomBorder}}
                 >
@@ -307,16 +320,25 @@ export default function Checkout() {
                   </div>
                 </div>
               </div>
-              <div>
-                <button className="bg-black text-white btn rounded-1 w-100 fw-bolder" onClick={()=>{handelPay()}}>
+              <div className="mb-3">
+                <button
+                  className="bg-black text-white btn rounded-1 w-100 fw-bolder"
+                  onClick={() => {
+                    handelPay();
+                  }}
+                >
                   Place Order
                 </button>
+              </div>
+              <div>
+                <PaypalCheckoutButton id="paypal-button" product={product} />
               </div>
             </div>
           </div>
         </div>
       </section>
       <Mission />
-    </>
-  );
+          
+    </>
+  );
 }
